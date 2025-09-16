@@ -47,6 +47,25 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        customer: {
+          DEFAULT: "hsl(var(--customer-primary))",
+          light: "hsl(var(--customer-light))",
+          foreground: "hsl(var(--customer-foreground))",
+        },
+        employee: {
+          DEFAULT: "hsl(var(--employee-primary))",
+          light: "hsl(var(--employee-light))",
+          foreground: "hsl(var(--employee-foreground))",
+        },
+        admin: {
+          DEFAULT: "hsl(var(--admin-primary))",
+          light: "hsl(var(--admin-light))",
+          foreground: "hsl(var(--admin-foreground))",
+        },
+        orange: {
+          DEFAULT: "hsl(var(--orange-accent))",
+          light: "hsl(var(--orange-light))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
