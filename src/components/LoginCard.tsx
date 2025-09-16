@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import { LucideIcon } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 interface LoginCardProps {
   title: string
@@ -13,6 +14,7 @@ interface LoginCardProps {
 }
 
 export const LoginCard = ({ title, description, features, icon: Icon, variant, onClick }: LoginCardProps) => {
+  const navigate = useNavigate()
   const cardStyles = {
     customer: "bg-customer-light border-customer/20 hover:border-customer/40",
     employee: "bg-employee-light border-employee/20 hover:border-employee/40", 
@@ -47,7 +49,7 @@ export const LoginCard = ({ title, description, features, icon: Icon, variant, o
         <Button 
           variant={variant} 
           className="w-full font-semibold"
-          onClick={onClick}
+          onClick={() => onClick ? onClick() : navigate(`/login?type=${variant}`)}
         >
           تسجيل الدخول كـ {title}
         </Button>
