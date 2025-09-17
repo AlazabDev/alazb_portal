@@ -1,16 +1,15 @@
-# Welcome to your Lovable project
+# Welcome to your Portal Alazab project
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/e577f314-0796-4c47-aaef-1bf550884044
-
+**URL**: https://https://github.com/AlazabDev/alazb_portal
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
 **Use Lovable**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/e577f314-0796-4c47-aaef-1bf550884044) and start prompting.
+Simply visit the  and start prompting.
 
 Changes made via Lovable will be committed automatically to this repo.
 
@@ -62,7 +61,7 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/e577f314-0796-4c47-aaef-1bf550884044) and click on Share -> Publish.
+Simply open [Azab goo](https://lovable.dev/projects/e577f314-0796-4c47-aaef-1bf550884044) and click on Share -> Publish.
 
 ## Can I connect a custom domain to my Lovable project?
 
