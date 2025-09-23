@@ -3,43 +3,33 @@ import { LoginCard } from "@/components/LoginCard"
 import { Card, CardContent } from "@/components/ui/card"
 import { Users, UserCheck, Shield, Building, Wrench, Lock, Globe } from "lucide-react"
 import { useNavigate } from "react-router-dom"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 const LoginSelection = () => {
   const navigate = useNavigate()
+  const { t } = useLanguage()
 
   const loginOptions = [
     {
-      title: "العملاء",
-      description: "للعملاء الذين يرغبون في الوصول إلى خدماتنا وطلباتهم وإدارة حساباتهم",
-      features: [
-        "عرض الطلبات والفواتير",
-        "تتبع حالة الطلبات", 
-        "إدارة الملف الشخصي"
-      ],
+      title: t.loginSelection.customer.title,
+      description: t.loginSelection.customer.description,
+      features: t.loginSelection.customer.features,
       icon: Users,
       variant: "customer" as const,
       onClick: () => navigate('/apps-hub')
     },
     {
-      title: "الموظفين", 
-      description: "للموظفين للوصول إلى أدوات العمل اليومية وإدارة المهام والعمليات",
-      features: [
-        "إدارة العملاء والمبيعات",
-        "تتبع المهام اليومية",
-        "التقارير والإحصائيات"
-      ],
+      title: t.loginSelection.employee.title,
+      description: t.loginSelection.employee.description,
+      features: t.loginSelection.employee.features,
       icon: UserCheck,
       variant: "employee" as const,
       onClick: () => navigate('/apps-hub')
     },
     {
-      title: "الإدارة",
-      description: "للمدراء للوصول إلى لوحة التحكم الكاملة وإدارة النظام والمستخدمين",
-      features: [
-        "إدارة المستخدمين والصلاحيات",
-        "الإعدادات العامة للنظام",
-        "التحليلات والتقارير المتقدمة"
-      ],
+      title: t.loginSelection.admin.title,
+      description: t.loginSelection.admin.description,
+      features: t.loginSelection.admin.features,
       icon: Shield,
       variant: "admin" as const,
       onClick: () => navigate('/apps-hub')
@@ -48,26 +38,26 @@ const LoginSelection = () => {
 
   const systemFeatures = [
     {
-      title: "إدارة العملاء",
-      description: "نظام شامل لإدارة العملاء والعلاقات",
+      title: t.systemFeatures.customerManagement.title,
+      description: t.systemFeatures.customerManagement.description,
       icon: Users,
       color: "bg-customer/10 text-customer"
     },
     {
-      title: "إدارة الموظفين", 
-      description: "أدوات متقدمة لإدارة الموارد البشرية",
+      title: t.systemFeatures.employeeManagement.title,
+      description: t.systemFeatures.employeeManagement.description,
       icon: UserCheck,
       color: "bg-employee/10 text-employee"
     },
     {
-      title: "الأمان والحماية",
-      description: "حماية متقدمة لبيانات المؤسسة",
+      title: t.systemFeatures.security.title,
+      description: t.systemFeatures.security.description,
       icon: Lock,
       color: "bg-admin/10 text-admin"
     },
     {
-      title: "التكامل الكامل",
-      description: "ربط جميع أقسام المؤسسة في منصة واحدة",
+      title: t.systemFeatures.integration.title,
+      description: t.systemFeatures.integration.description,
       icon: Globe,
       color: "bg-orange/10 text-orange"
     }
@@ -82,22 +72,22 @@ const LoginSelection = () => {
         <div className="container mx-auto px-6 text-center">
           <div className="inline-flex items-center gap-2 bg-orange-light px-4 py-2 rounded-full text-orange font-medium mb-6">
             <Building className="w-4 h-4" />
-            نظام تخطيط موارد المؤسسة المتكامل
+            {t.loginSelection.description}
           </div>
           
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Al-Azab Construction <span className="bg-orange text-white px-3 py-1 rounded-lg">ERP</span>
+            {t.loginSelection.title} <span className="bg-orange text-white px-3 py-1 rounded-lg">{t.loginSelection.erp}</span>
           </h1>
           
-          <p className="text-xl text-muted-foreground mb-2">نظام تخطيط موارد المؤسسة</p>
-          <p className="text-orange font-medium mb-12">🔧 نظام تخطيط موارد المؤسسة المتكامل</p>
+          <p className="text-xl text-muted-foreground mb-2">{t.loginSelection.subtitle}</p>
+          <p className="text-orange font-medium mb-12">🔧 {t.company.slogan}</p>
 
           <div className="inline-flex items-center gap-2 text-orange font-medium mb-8">
             <Wrench className="w-5 h-5" />
-            اختر مستوى الوصول الخاص بك
+            {t.login.accessLevel}
           </div>
           
-          <h2 className="text-3xl font-bold text-foreground mb-4">اختيار نوع الحساب للدخول</h2>
+          <h2 className="text-3xl font-bold text-foreground mb-4">{t.loginSelection.selectAccount}</h2>
           <p className="text-muted-foreground mb-16 max-w-2xl mx-auto">
             يرجى اختيار نوع الحساب المناسب للوصول إلى ميزاتك المخصصة والتطبيقات
           </p>
@@ -119,7 +109,7 @@ const LoginSelection = () => {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">ميزات النظام</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">{t.systemFeatures.title}</h2>
             <div className="w-16 h-1 bg-orange mx-auto rounded"></div>
           </div>
           
@@ -145,67 +135,67 @@ const LoginSelection = () => {
           <div className="grid md:grid-cols-4 gap-8">
             {/* Company Info */}
             <div>
-              <h3 className="font-bold mb-4">Al-Azab Construction</h3>
+              <h3 className="font-bold mb-4">{t.footer.company.name}</h3>
               <div className="space-y-2 text-sm opacity-90">
-                <p>📞 (+20) 1000000000</p>
-                <p>📍 القاهرة الجديدة، مصر</p>
-                <p>📧 البريد الإلكتروني</p>
+                <p>📞 {t.footer.company.phone}</p>
+                <p>📍 {t.footer.company.address}</p>
+                <p>📧 {t.footer.company.email}</p>
               </div>
               <button className="bg-orange text-white px-4 py-2 rounded-lg mt-4 text-sm font-medium">
-                احجز الآن
+                {t.footer.company.bookNow}
               </button>
             </div>
 
             {/* Page Links */}
             <div>
-              <h4 className="font-semibold mb-4">روابط الصفحات</h4>
+              <h4 className="font-semibold mb-4">{t.footer.pageLinks.title}</h4>
               <div className="space-y-2 text-sm opacity-90">
-                <p>الرئيسية</p>
-                <p>من نحن</p>
-                <p>الشهادات</p>
-                <p>المشاريع</p>
-                <p>الخدمات</p>
-                <p>العملاء</p>
-                <p>المدونة</p>
-                <p>اتصل بنا</p>
+                <p>{t.footer.pageLinks.home}</p>
+                <p>{t.footer.pageLinks.about}</p>
+                <p>{t.footer.pageLinks.certificates}</p>
+                <p>{t.footer.pageLinks.projects}</p>
+                <p>{t.footer.pageLinks.services}</p>
+                <p>{t.footer.pageLinks.clients}</p>
+                <p>{t.footer.pageLinks.blog}</p>
+                <p>{t.footer.pageLinks.contact}</p>
               </div>
             </div>
 
             {/* More Info */}
             <div>
-              <h4 className="font-semibold mb-4">معلومات أكثر</h4>
+              <h4 className="font-semibold mb-4">{t.footer.moreInfo.title}</h4>
               <div className="space-y-2 text-sm opacity-90">
-                <p>الأصول التجارية</p>
-                <p>تطبيق الواتساب</p>
-                <p>التحميلات</p>
-                <p>دعم العملاء</p>
-                <p>طلب عرض سعر</p>
+                <p>{t.footer.moreInfo.businessAssets}</p>
+                <p>{t.footer.moreInfo.whatsappApp}</p>
+                <p>{t.footer.moreInfo.downloads}</p>
+                <p>{t.footer.moreInfo.customerSupport}</p>
+                <p>{t.footer.moreInfo.requestQuote}</p>
               </div>
             </div>
 
             {/* Interactive Services */}
             <div>
-              <h4 className="font-semibold mb-4">الخدمات التفاعلية</h4>
+              <h4 className="font-semibold mb-4">{t.footer.interactiveServices.title}</h4>
               <div className="space-y-3">
                 <div className="flex items-center gap-2 text-sm">
                   <span className="w-6 h-6 bg-blue-500 rounded text-center text-xs">f</span>
-                  <span>ChatHub</span>
+                  <span>{t.footer.interactiveServices.chatHub}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <span className="w-6 h-6 bg-orange rounded text-center text-xs">N</span>
-                  <span>طلب صيانة جديد</span>
+                  <span>{t.footer.interactiveServices.newMaintenance}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <span className="w-6 h-6 bg-orange rounded text-center text-xs">T</span>
-                  <span>تتبع الطلبات</span>
+                  <span>{t.footer.interactiveServices.trackOrders}</span>
                 </div>
               </div>
             </div>
           </div>
           
           <div className="border-t border-primary-foreground/20 mt-8 pt-6 text-center text-sm opacity-75">
-            <p>© حقوق الطبع والنشر Al-Azab Construction جميع الحقوق محفوظة</p>
-            <p className="mt-2">مصمم بواسطة Alazab.dev</p>
+            <p>{t.footer.copyright}</p>
+            <p className="mt-2">{t.footer.designedBy}</p>
           </div>
         </div>
       </footer>

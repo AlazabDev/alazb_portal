@@ -8,10 +8,12 @@ import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Users, UserCheck, Shield, Eye, EyeOff, ArrowRight, Lock, Mail } from "lucide-react"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 const Login = () => {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
+  const { t } = useLanguage()
   const userType = searchParams.get('type') || 'customer'
   
   const [formData, setFormData] = useState({
@@ -24,25 +26,25 @@ const Login = () => {
 
   const userTypeConfig = {
     customer: {
-      title: "تسجيل دخول العملاء",
-      description: "الوصول إلى خدماتك وطلباتك",
+      title: t.loginSelection.customer.title + " - " + t.login.loginButton,
+      description: t.loginSelection.customer.description,
       icon: Users,
       variant: "customer" as const,
-      features: ["عرض الطلبات والفواتير", "تتبع حالة المشاريع", "إدارة الملف الشخصي"]
+      features: t.loginSelection.customer.features
     },
     employee: {
-      title: "تسجيل دخول الموظفين", 
-      description: "الوصول إلى أدوات العمل اليومية",
+      title: t.loginSelection.employee.title + " - " + t.login.loginButton,
+      description: t.loginSelection.employee.description,
       icon: UserCheck,
       variant: "employee" as const,
-      features: ["إدارة المهام والمشاريع", "تتبع الوقت والحضور", "التقارير والإحصائيات"]
+      features: t.loginSelection.employee.features
     },
     admin: {
-      title: "تسجيل دخول الإدارة",
-      description: "الوصول الكامل للنظام والإعدادات",
+      title: t.loginSelection.admin.title + " - " + t.login.loginButton,
+      description: t.loginSelection.admin.description,
       icon: Shield,
       variant: "admin" as const,
-      features: ["إدارة المستخدمين والصلاحيات", "الإعدادات العامة", "التحليلات المتقدمة"]
+      features: t.loginSelection.admin.features
     }
   }
 
