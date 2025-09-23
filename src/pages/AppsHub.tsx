@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { Header } from "@/components/Layout/Header"
+import { useLanguage } from "@/contexts/LanguageContext"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -27,81 +28,82 @@ const Banknote = DollarSign
 const FileBarChart = BarChart
 
 const AppsHub = () => {
+  const { t } = useLanguage()
   const [searchQuery, setSearchQuery] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("الكل")
+  const [selectedCategory, setSelectedCategory] = useState(t.appsHub.allApps)
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
   const [favoriteApps, setFavoriteApps] = useState<string[]>([])
 
   const appCategories = [
-    "الكل", "النظام الأساسي", "المحاسبة والمالية", "إدارة العملاء", "الموارد البشرية", 
-    "إدارة المشاريع", "التواصل والتفاعل", "المساعدة والدعم", "التقارير والتحليلات", "الخدمات المتخصصة"
+    t.appsHub.allApps, t.appsHub.systemCore, t.appsHub.accounting, t.appsHub.crm, t.appsHub.hr, 
+    t.appsHub.projects, t.appsHub.communication, t.appsHub.support, t.appsHub.reports, t.appsHub.specialized
   ]
 
   const allApps = [
     // النظام الأساسي
-    { name: "Frappe Framework", category: "النظام الأساسي", color: "bg-blue-600", icon: Database, description: "منصة التطوير الأساسية", features: ["الإطار الأساسي", "قاعدة البيانات", "واجهة المطور"], url: "/app/frappe" },
-    { name: "ERPNext", category: "النظام الأساسي", color: "bg-orange-600", icon: Settings, description: "نظام ERP المؤسسي الشامل", features: ["إدارة مؤسسية", "تكامل شامل", "تقارير متقدمة"], url: "/app/erpnext" },
-    { name: "App Studio", category: "النظام الأساسي", color: "bg-purple-600", icon: Cpu, description: "استوديو تطوير التطبيقات", features: ["تطوير التطبيقات", "تخصيص النظام", "إدارة الكود"], url: "/app/studio" },
-    { name: "Website Builder", category: "النظام الأساسي", color: "bg-green-600", icon: Globe, description: "منشئ المواقع الإلكترونية", features: ["بناء المواقع", "تصميم متجاوب", "تحسين محركات البحث"], url: "/app/builder" },
+    { name: t.appsHub.apps.frappe.name, category: t.appsHub.systemCore, color: "bg-blue-600", icon: Database, description: t.appsHub.apps.frappe.description, features: t.appsHub.apps.frappe.features, url: "/app/frappe" },
+    { name: t.appsHub.apps.erpnext.name, category: t.appsHub.systemCore, color: "bg-orange-600", icon: Settings, description: t.appsHub.apps.erpnext.description, features: t.appsHub.apps.erpnext.features, url: "/app/erpnext" },
+    { name: t.appsHub.apps.studio.name, category: t.appsHub.systemCore, color: "bg-purple-600", icon: Cpu, description: t.appsHub.apps.studio.description, features: t.appsHub.apps.studio.features, url: "/app/studio" },
+    { name: t.appsHub.apps.builder.name, category: t.appsHub.systemCore, color: "bg-green-600", icon: Globe, description: t.appsHub.apps.builder.description, features: t.appsHub.apps.builder.features, url: "/app/builder" },
 
     // المحاسبة والمالية
-    { name: "الكتب المحاسبية", category: "المحاسبة والمالية", color: "bg-emerald-500", icon: FileText, description: "النظام المحاسبي المتكامل", features: ["القيود المحاسبية", "الميزانية العامة", "التقارير المالية"], url: "/app/books" },
-    { name: "المدفوعات", category: "المحاسبة والمالية", color: "bg-blue-500", icon: CreditCard, description: "إدارة المدفوعات الإلكترونية", features: ["بوابات الدفع", "تتبع المدفوعات", "الفواتير"], url: "/app/payments" },
-    { name: "الخدمات المصرفية", category: "المحاسبة والمالية", color: "bg-indigo-500", icon: DollarSign, description: "التكامل مع البنوك", features: ["ربط البنوك", "تسوية الحسابات", "التحويلات"], url: "/app/banking" },
-    { name: "مدفوعات العقود", category: "المحاسبة والمالية", color: "bg-teal-500", icon: FileText, description: "إدارة مدفوعات العقود", features: ["جدولة المدفوعات", "متابعة العقود", "التنبيهات"], url: "/app/contract_payment" },
-    { name: "كشوف العملاء", category: "المحاسبة والمالية", color: "bg-cyan-500", icon: FileBarChart, description: "كشوف حسابات العملاء", features: ["كشوف تفصيلية", "تتبع المستحقات", "التقارير"], url: "/app/customer_statements" },
-    { name: "فواتير المرافق", category: "المحاسبة والمالية", color: "bg-yellow-500", icon: Zap, description: "إدارة فواتير المرافق", features: ["فواتير المياه والكهرباء", "قراءة العدادات", "التحصيل"], url: "/app/utility_billing" },
-    { name: "حساب الزكاة", category: "المحاسبة والمالية", color: "bg-green-500", icon: Calculator, description: "حساب وإدارة الزكاة", features: ["حساب تلقائي للزكاة", "تقارير الزكاة", "التوزيع"], url: "/app/frappe_zakat" },
+    { name: t.appsHub.apps.books.name, category: t.appsHub.accounting, color: "bg-emerald-500", icon: FileText, description: t.appsHub.apps.books.description, features: t.appsHub.apps.books.features, url: "/app/books" },
+    { name: t.appsHub.apps.payments.name, category: t.appsHub.accounting, color: "bg-blue-500", icon: CreditCard, description: t.appsHub.apps.payments.description, features: t.appsHub.apps.payments.features, url: "/app/payments" },
+    { name: t.appsHub.apps.banking.name, category: t.appsHub.accounting, color: "bg-indigo-500", icon: DollarSign, description: t.appsHub.apps.banking.description, features: t.appsHub.apps.banking.features, url: "/app/banking" },
+    { name: t.appsHub.apps.contract_payment.name, category: t.appsHub.accounting, color: "bg-teal-500", icon: FileText, description: t.appsHub.apps.contract_payment.description, features: t.appsHub.apps.contract_payment.features, url: "/app/contract_payment" },
+    { name: t.appsHub.apps.customer_statements.name, category: t.appsHub.accounting, color: "bg-cyan-500", icon: FileBarChart, description: t.appsHub.apps.customer_statements.description, features: t.appsHub.apps.customer_statements.features, url: "/app/customer_statements" },
+    { name: t.appsHub.apps.utility_billing.name, category: t.appsHub.accounting, color: "bg-yellow-500", icon: Zap, description: t.appsHub.apps.utility_billing.description, features: t.appsHub.apps.utility_billing.features, url: "/app/utility_billing" },
+    { name: t.appsHub.apps.zakat.name, category: t.appsHub.accounting, color: "bg-green-500", icon: Calculator, description: t.appsHub.apps.zakat.description, features: t.appsHub.apps.zakat.features, url: "/app/frappe_zakat" },
 
     // إدارة العملاء والمبيعات
-    { name: "إدارة علاقات العملاء", category: "إدارة العملاء", color: "bg-pink-500", icon: Users, description: "نظام CRM المتطور", features: ["قاعدة العملاء", "تتبع التفاعلات", "إدارة الفرص"], url: "/app/crm" },
-    { name: "المتجر الإلكتروني", category: "إدارة العملاء", color: "bg-purple-500", icon: ShoppingCart, description: "منصة التجارة الإلكترونية", features: ["متجر متكامل", "إدارة المنتجات", "معالجة الطلبات"], url: "/app/webshop" },
-    { name: "تقدير الأسعار", category: "إدارة العملاء", color: "bg-orange-500", icon: Calculator, description: "نظام تقدير الأسعار الذكي", features: ["حساب التكاليف", "عروض الأسعار", "مقارنة الأسعار"], url: "/app/erpnext_price_estimation" },
-    { name: "عملية فتح العروض", category: "إدارة العملاء", color: "bg-red-500", icon: FileText, description: "إدارة عملية طلبات العروض", features: ["إدارة المناقصات", "تقييم العروض", "الترسية"], url: "/app/rfq_opening_process" },
+    { name: t.appsHub.apps.crm.name, category: t.appsHub.crm, color: "bg-pink-500", icon: Users, description: t.appsHub.apps.crm.description, features: t.appsHub.apps.crm.features, url: "/app/crm" },
+    { name: t.appsHub.apps.webshop.name, category: t.appsHub.crm, color: "bg-purple-500", icon: ShoppingCart, description: t.appsHub.apps.webshop.description, features: t.appsHub.apps.webshop.features, url: "/app/webshop" },
+    { name: t.appsHub.apps.price_estimation.name, category: t.appsHub.crm, color: "bg-orange-500", icon: Calculator, description: t.appsHub.apps.price_estimation.description, features: t.appsHub.apps.price_estimation.features, url: "/app/erpnext_price_estimation" },
+    { name: t.appsHub.apps.rfq.name, category: t.appsHub.crm, color: "bg-red-500", icon: FileText, description: t.appsHub.apps.rfq.description, features: t.appsHub.apps.rfq.features, url: "/app/rfq_opening_process" },
 
     // الموارد البشرية
-    { name: "نظام الموارد البشرية", category: "الموارد البشرية", color: "bg-blue-600", icon: Users, description: "إدارة شاملة للموارد البشرية", features: ["ملفات الموظفين", "الحضور والانصراف", "إدارة الإجازات"], url: "/app/hrms" },
-    { name: "كشف رواتب المشاريع", category: "الموارد البشرية", color: "bg-green-600", icon: DollarSign, description: "إدارة رواتب فرق المشاريع", features: ["رواتب المشاريع", "توزيع التكاليف", "تقارير الأجور"], url: "/app/project_payroll" },
+    { name: t.appsHub.apps.hrms.name, category: t.appsHub.hr, color: "bg-blue-600", icon: Users, description: t.appsHub.apps.hrms.description, features: t.appsHub.apps.hrms.features, url: "/app/hrms" },
+    { name: t.appsHub.apps.project_payroll.name, category: t.appsHub.hr, color: "bg-green-600", icon: DollarSign, description: t.appsHub.apps.project_payroll.description, features: t.appsHub.apps.project_payroll.features, url: "/app/project_payroll" },
 
     // إدارة المشاريع
-    { name: "مخطط جانت", category: "إدارة المشاريع", color: "bg-indigo-600", icon: BarChart, description: "مخططات جانت للمشاريع", features: ["التخطيط الزمني", "تتبع التقدم", "إدارة المهام"], url: "/app/gantt" },
-    { name: "خطة اللعبة", category: "إدارة المشاريع", color: "bg-purple-600", icon: Target, description: "تخطيط وإدارة المشاريع", features: ["تخطيط استراتيجي", "تتبع الأهداف", "إدارة الفريق"], url: "/app/gameplan" },
-    { name: "قوائم المهام", category: "إدارة المشاريع", color: "bg-cyan-600", icon: CheckCircle, description: "إدارة المهام والأنشطة", features: ["قوائم مهام", "تذكيرات", "تتبع الإنجاز"], url: "/app/todo" },
-    { name: "إدارة العقارات", category: "إدارة المشاريع", color: "bg-teal-600", icon: Building, description: "نظام إدارة العقارات", features: ["سجل العقارات", "عقود الإيجار", "الصيانة"], url: "/app/propms" },
+    { name: t.appsHub.apps.gantt.name, category: t.appsHub.projects, color: "bg-indigo-600", icon: BarChart, description: t.appsHub.apps.gantt.description, features: t.appsHub.apps.gantt.features, url: "/app/gantt" },
+    { name: t.appsHub.apps.gameplan.name, category: t.appsHub.projects, color: "bg-purple-600", icon: Target, description: t.appsHub.apps.gameplan.description, features: t.appsHub.apps.gameplan.features, url: "/app/gameplan" },
+    { name: t.appsHub.apps.todo.name, category: t.appsHub.projects, color: "bg-cyan-600", icon: CheckCircle, description: t.appsHub.apps.todo.description, features: t.appsHub.apps.todo.features, url: "/app/todo" },
+    { name: t.appsHub.apps.propms.name, category: t.appsHub.projects, color: "bg-teal-600", icon: Building, description: t.appsHub.apps.propms.description, features: t.appsHub.apps.propms.features, url: "/app/propms" },
 
     // التواصل والتفاعل
-    { name: "البريد الإلكتروني", category: "التواصل والتفاعل", color: "bg-blue-500", icon: Mail, description: "نظام البريد الإلكتروني", features: ["إرسال واستقبال", "تنظيم الرسائل", "المرفقات"], url: "/app/mail" },
-    { name: "واتساب للأعمال", category: "التواصل والتفاعل", color: "bg-green-500", icon: MessageSquare, description: "تكامل واتساب للأعمال", features: ["رسائل تلقائية", "دعم العملاء", "إشعارات"], url: "/app/waba_integration" },
-    { name: "واتساب العادي", category: "التواصل والتفاعل", color: "bg-green-600", icon: Phone, description: "تكامل واتساب العادي", features: ["رسائل مباشرة", "إشعارات", "تتبع المحادثات"], url: "/app/frappe_whatsapp" },
-    { name: "تليجرام", category: "التواصل والتفاعل", color: "bg-blue-400", icon: MessageSquare, description: "تكامل تليجرام", features: ["رسائل تليجرام", "بوت تلقائي", "إشعارات"], url: "/app/erpnext_telegram_integration" },
-    { name: "إكسوتيل", category: "التواصل والتفاعل", color: "bg-orange-400", icon: Phone, description: "تكامل خدمات الاتصال", features: ["مكالمات صوتية", "تسجيل المكالمات", "تقارير الاتصال"], url: "/app/exotel_integration" },
-    { name: "تذكير البريد", category: "التواصل والتفاعل", color: "bg-yellow-400", icon: Bell, description: "نظام تذكير البريد", features: ["تذكيرات تلقائية", "جدولة الرسائل", "متابعة الردود"], url: "/app/mail_reminder" },
-    { name: "خدمة توصيل البريد", category: "التواصل والتفاعل", color: "bg-purple-400", icon: Mail, description: "خدمة توصيل البريد الإلكتروني", features: ["توصيل موثوق", "تتبع الرسائل", "تقارير التسليم"], url: "/app/email_delivery_service" },
+    { name: t.appsHub.apps.mail.name, category: t.appsHub.communication, color: "bg-blue-500", icon: Mail, description: t.appsHub.apps.mail.description, features: t.appsHub.apps.mail.features, url: "/app/mail" },
+    { name: t.appsHub.apps.waba_integration.name, category: t.appsHub.communication, color: "bg-green-500", icon: MessageSquare, description: t.appsHub.apps.waba_integration.description, features: t.appsHub.apps.waba_integration.features, url: "/app/waba_integration" },
+    { name: t.appsHub.apps.whatsapp.name, category: t.appsHub.communication, color: "bg-green-600", icon: Phone, description: t.appsHub.apps.whatsapp.description, features: t.appsHub.apps.whatsapp.features, url: "/app/frappe_whatsapp" },
+    { name: t.appsHub.apps.telegram_integration.name, category: t.appsHub.communication, color: "bg-blue-400", icon: MessageSquare, description: t.appsHub.apps.telegram_integration.description, features: t.appsHub.apps.telegram_integration.features, url: "/app/erpnext_telegram_integration" },
+    { name: t.appsHub.apps.exotel_integration.name, category: t.appsHub.communication, color: "bg-orange-400", icon: Phone, description: t.appsHub.apps.exotel_integration.description, features: t.appsHub.apps.exotel_integration.features, url: "/app/exotel_integration" },
+    { name: t.appsHub.apps.mail_reminder.name, category: t.appsHub.communication, color: "bg-yellow-400", icon: Bell, description: t.appsHub.apps.mail_reminder.description, features: t.appsHub.apps.mail_reminder.features, url: "/app/mail_reminder" },
+    { name: t.appsHub.apps.email_delivery_service.name, category: t.appsHub.communication, color: "bg-purple-400", icon: Mail, description: t.appsHub.apps.email_delivery_service.description, features: t.appsHub.apps.email_delivery_service.features, url: "/app/email_delivery_service" },
 
     // المساعدة والدعم
-    { name: "مكتب المساعدة", category: "المساعدة والدعم", color: "bg-red-500", icon: Headphones, description: "نظام دعم العملاء", features: ["تذاكر الدعم", "قاعدة المعرفة", "دردشة مباشرة"], url: "/app/helpdesk" },
-    { name: "الويكي", category: "المساعدة والدعم", color: "bg-indigo-500", icon: Bookmark, description: "قاعدة المعرفة والوثائق", features: ["مقالات تفاعلية", "بحث متقدم", "تنظيم المحتوى"], url: "/app/wiki" },
-    { name: "نظام إدارة التعلم", category: "المساعدة والدعم", color: "bg-purple-500", icon: GraduationCap, description: "منصة التعليم الإلكتروني", features: ["دورات تدريبية", "اختبارات", "شهادات"], url: "/app/lms" },
+    { name: t.appsHub.apps.helpdesk.name, category: t.appsHub.support, color: "bg-red-500", icon: Headphones, description: t.appsHub.apps.helpdesk.description, features: t.appsHub.apps.helpdesk.features, url: "/app/helpdesk" },
+    { name: t.appsHub.apps.wiki.name, category: t.appsHub.support, color: "bg-indigo-500", icon: Bookmark, description: t.appsHub.apps.wiki.description, features: t.appsHub.apps.wiki.features, url: "/app/wiki" },
+    { name: t.appsHub.apps.lms.name, category: t.appsHub.support, color: "bg-purple-500", icon: GraduationCap, description: t.appsHub.apps.lms.description, features: t.appsHub.apps.lms.features, url: "/app/lms" },
 
     // التقارير والتحليلات
-    { name: "الرسوم البيانية", category: "التقارير والتحليلات", color: "bg-orange-600", icon: PieChart, description: "مكتبة الرسوم البيانية", features: ["رسوم تفاعلية", "تحليل البيانات", "لوحات معلومات"], url: "/app/frappe_charts" },
-    { name: "الرؤى والتحليلات", category: "التقارير والتحليلات", color: "bg-cyan-600", icon: TrendingUp, description: "تحليلات ذكية متقدمة", features: ["ذكاء اصطناعي", "تنبؤات", "تحليل الاتجاهات"], url: "/app/insights" },
+    { name: t.appsHub.apps.charts.name, category: t.appsHub.reports, color: "bg-orange-600", icon: PieChart, description: t.appsHub.apps.charts.description, features: t.appsHub.apps.charts.features, url: "/app/frappe_charts" },
+    { name: t.appsHub.apps.insights.name, category: t.appsHub.reports, color: "bg-cyan-600", icon: TrendingUp, description: t.appsHub.apps.insights.description, features: t.appsHub.apps.insights.features, url: "/app/insights" },
 
     // الخدمات المتخصصة
-    { name: "إدارة التأشيرات", category: "الخدمات المتخصصة", color: "bg-blue-700", icon: Key, description: "نظام إدارة التأشيرات", features: ["طلبات التأشيرة", "تتبع الحالة", "المستندات"], url: "/app/visa_management" },
-    { name: "الامتثال المصري", category: "الخدمات المتخصصة", color: "bg-red-600", icon: Shield, description: "نظام الامتثال للقوانين المصرية", features: ["ضريبة القيمة المضافة", "التقارير الحكومية", "الامتثال القانوني"], url: "/app/erpnext_egypt_compliance" },
-    { name: "نظام الإقراض", category: "الخدمات المتخصصة", color: "bg-green-700", icon: DollarSign, description: "إدارة القروض والتمويل", features: ["طلبات القروض", "جدولة السداد", "إدارة المخاطر"], url: "/app/lending" },
-    { name: "التصميم", category: "الخدمات المتخصصة", color: "bg-pink-600", icon: Paintbrush, description: "أدوات التصميم والإبداع", features: ["تصميم جرافيكي", "قوالب", "أدوات إبداعية"], url: "/app/design" },
-    { name: "التوقيع الرقمي", category: "الخدمات المتخصصة", color: "bg-purple-700", icon: Edit, description: "نظام التوقيع الإلكتروني", features: ["توقيع آمن", "تشفير", "مصادقة رقمية"], url: "/app/digital_signer" },
-    { name: "مصمم الطباعة", category: "الخدمات المتخصصة", color: "bg-gray-600", icon: FileText, description: "تصميم وتخصيص التقارير", features: ["قوالب مخصصة", "تنسيق متقدم", "طباعة احترافية"], url: "/app/print_designer" },
-    { name: "صناع التغيير", category: "الخدمات المتخصصة", color: "bg-yellow-600", icon: Users, description: "منصة إدارة المبادرات", features: ["إدارة المبادرات", "تتبع التأثير", "التعاون"], url: "/app/changemakers" },
+    { name: t.appsHub.apps.visa_management.name, category: t.appsHub.specialized, color: "bg-blue-700", icon: Key, description: t.appsHub.apps.visa_management.description, features: t.appsHub.apps.visa_management.features, url: "/app/visa_management" },
+    { name: t.appsHub.apps.egypt_compliance.name, category: t.appsHub.specialized, color: "bg-red-600", icon: Shield, description: t.appsHub.apps.egypt_compliance.description, features: t.appsHub.apps.egypt_compliance.features, url: "/app/erpnext_egypt_compliance" },
+    { name: t.appsHub.apps.lending.name, category: t.appsHub.specialized, color: "bg-green-700", icon: DollarSign, description: t.appsHub.apps.lending.description, features: t.appsHub.apps.lending.features, url: "/app/lending" },
+    { name: t.appsHub.apps.design.name, category: t.appsHub.specialized, color: "bg-pink-600", icon: Paintbrush, description: t.appsHub.apps.design.description, features: t.appsHub.apps.design.features, url: "/app/design" },
+    { name: t.appsHub.apps.digital_signer.name, category: t.appsHub.specialized, color: "bg-purple-700", icon: Edit, description: t.appsHub.apps.digital_signer.description, features: t.appsHub.apps.digital_signer.features, url: "/app/digital_signer" },
+    { name: t.appsHub.apps.print_designer.name, category: t.appsHub.specialized, color: "bg-gray-600", icon: FileText, description: t.appsHub.apps.print_designer.description, features: t.appsHub.apps.print_designer.features, url: "/app/print_designer" },
+    { name: t.appsHub.apps.changemakers.name, category: t.appsHub.specialized, color: "bg-yellow-600", icon: Users, description: t.appsHub.apps.changemakers.description, features: t.appsHub.apps.changemakers.features, url: "/app/changemakers" },
 
     // أدوات إضافية
-    { name: "القرص السحابي", category: "الخدمات المتخصصة", color: "bg-blue-500", icon: Cloud, description: "تخزين ومشاركة الملفات", features: ["تخزين آمن", "مشاركة الملفات", "نسخ احتياطية"], url: "/app/drive" },
-    { name: "الاجتماعات", category: "التواصل والتفاعل", color: "bg-green-500", icon: Video, description: "نظام إدارة الاجتماعات", features: ["جدولة الاجتماعات", "محاضر", "متابعة القرارات"], url: "/app/meeting" },
-    { name: "تريلو", category: "إدارة المشاريع", color: "bg-blue-400", icon: Grid, description: "تكامل مع تريلو", features: ["لوحات المشاريع", "بطاقات المهام", "تتبع التقدم"], url: "/app/trello" },
-    { name: "رافين", category: "التواصل والتفاعل", color: "bg-gray-500", icon: MessageSquare, description: "منصة التواصل الداخلي", features: ["محادثات الفريق", "قنوات", "مشاركة الملفات"], url: "/app/raven" },
-    { name: "الذكاء الاصطناعي", category: "الخدمات المتخصصة", color: "bg-violet-600", icon: Cpu, description: "تكامل الذكاء الاصطناعي", features: ["مساعد ذكي", "تحليل النصوص", "أتمتة المهام"], url: "/app/frappe_openai_integration" }
+    { name: t.appsHub.apps.drive.name, category: t.appsHub.specialized, color: "bg-blue-500", icon: Cloud, description: t.appsHub.apps.drive.description, features: t.appsHub.apps.drive.features, url: "/app/drive" },
+    { name: t.appsHub.apps.meeting.name, category: t.appsHub.communication, color: "bg-green-500", icon: Video, description: t.appsHub.apps.meeting.description, features: t.appsHub.apps.meeting.features, url: "/app/meeting" },
+    { name: t.appsHub.apps.trello.name, category: t.appsHub.projects, color: "bg-blue-400", icon: Grid, description: t.appsHub.apps.trello.description, features: t.appsHub.apps.trello.features, url: "/app/trello" },
+    { name: t.appsHub.apps.raven.name, category: t.appsHub.communication, color: "bg-gray-500", icon: MessageSquare, description: t.appsHub.apps.raven.description, features: t.appsHub.apps.raven.features, url: "/app/raven" },
+    { name: t.appsHub.apps.openai_integration.name, category: t.appsHub.specialized, color: "bg-violet-600", icon: Cpu, description: t.appsHub.apps.openai_integration.description, features: t.appsHub.apps.openai_integration.features, url: "/app/frappe_openai_integration" }
   ]
 
   // Fix: Add the missing Clock and other icons - REMOVED, using lucide-react icons directly
@@ -109,7 +111,7 @@ const AppsHub = () => {
   const filteredApps = allApps.filter(app => {
     const matchesSearch = app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          app.description.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesCategory = selectedCategory === "الكل" || app.category === selectedCategory
+    const matchesCategory = selectedCategory === t.appsHub.allApps || app.category === selectedCategory
     return matchesSearch && matchesCategory
   })
 
@@ -121,12 +123,7 @@ const AppsHub = () => {
     )
   }
 
-  const categories = [
-    "التطبيقات المفضلة: وصول سريع لما تستخدمه يومياً.",
-    "المشاريع والصيانة: أدوات لتتبع عملك وخدماتك.",
-    "لوحات المعلومات: تقارير في الوقت الفعلي وتحليلات.",
-    "البريد والتواصل: اتصال آمن وفعال مع فريقك وعملائك."
-  ]
+  const categories = t.appsHub.categories
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
@@ -178,7 +175,7 @@ const AppsHub = () => {
         <div className="container mx-auto px-6">
           <div className="animate-fade-in">
             <h2 className="text-4xl font-bold text-center text-foreground mb-6">
-              كل ما تحتاجه لإدارة عملك موجود هنا، <span className="text-orange">بنقرة واحدة فقط</span>
+              {t.appsHub.welcome}
             </h2>
             
             {/* Enhanced Search and Filters */}
@@ -187,7 +184,7 @@ const AppsHub = () => {
               <div className="relative">
                 <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-muted-foreground w-6 h-6" />
                 <Input 
-                  placeholder="ابحث عن التطبيقات والأدوات..."
+                  placeholder={t.appsHub.searchPlaceholder}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="pl-14 pr-6 py-4 text-lg rounded-2xl border-2 focus:border-primary shadow-lg transition-all duration-300 hover:shadow-xl"
