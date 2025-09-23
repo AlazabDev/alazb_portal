@@ -33,58 +33,75 @@ const AppsHub = () => {
   const [favoriteApps, setFavoriteApps] = useState<string[]>([])
 
   const appCategories = [
-    "الكل", "إدارة المشاريع", "المحاسبة والمالية", "الموارد البشرية", 
-    "المبيعات والتسويق", "المخازن", "الصيانة", "التقارير", "الأمان"
+    "الكل", "النظام الأساسي", "المحاسبة والمالية", "إدارة العملاء", "الموارد البشرية", 
+    "إدارة المشاريع", "التواصل والتفاعل", "المساعدة والدعم", "التقارير والتحليلات", "الخدمات المتخصصة"
   ]
 
   const allApps = [
-    // إدارة المشاريع
-    { name: "مخطط المشاريع", category: "إدارة المشاريع", color: "bg-blue-500", icon: Calendar, description: "إدارة وتتبع المشاريع والمهام", features: ["تتبع المهام", "جدولة العمل", "إدارة الفرق"] },
-    { name: "تتبع الوقت", category: "إدارة المشاريع", color: "bg-green-500", icon: Clock, description: "تسجيل وقت العمل والمهام", features: ["تسجيل الوقت", "التقارير", "الفواتير"] },
-    { name: "إدارة المهام", category: "إدارة المشاريع", color: "bg-purple-500", icon: CheckCircle, description: "تنظيم وإدارة المهام اليومية", features: ["قوائم المهام", "التذكيرات", "التعاون"] },
-    { name: "Gantt Chart", category: "إدارة المشاريع", color: "bg-indigo-500", icon: BarChart, description: "مخططات جانت للمشاريع", features: ["التخطيط", "التتبع", "التحليل"] },
+    // النظام الأساسي
+    { name: "Frappe Framework", category: "النظام الأساسي", color: "bg-blue-600", icon: Database, description: "منصة التطوير الأساسية", features: ["الإطار الأساسي", "قاعدة البيانات", "واجهة المطور"], url: "/app/frappe" },
+    { name: "ERPNext", category: "النظام الأساسي", color: "bg-orange-600", icon: Settings, description: "نظام ERP المؤسسي الشامل", features: ["إدارة مؤسسية", "تكامل شامل", "تقارير متقدمة"], url: "/app/erpnext" },
+    { name: "App Studio", category: "النظام الأساسي", color: "bg-purple-600", icon: Cpu, description: "استوديو تطوير التطبيقات", features: ["تطوير التطبيقات", "تخصيص النظام", "إدارة الكود"], url: "/app/studio" },
+    { name: "Website Builder", category: "النظام الأساسي", color: "bg-green-600", icon: Globe, description: "منشئ المواقع الإلكترونية", features: ["بناء المواقع", "تصميم متجاوب", "تحسين محركات البحث"], url: "/app/builder" },
 
-    // المحاسبة والمالية  
-    { name: "الحسابات العامة", category: "المحاسبة والمالية", color: "bg-emerald-500", icon: Calculator, description: "النظام المحاسبي الشامل", features: ["القيود المحاسبية", "الميزانية", "التقارير المالية"] },
-    { name: "الفواتير", category: "المحاسبة والمالية", color: "bg-orange-500", icon: FileText, description: "إنشاء وإدارة الفواتير", features: ["فواتير احترافية", "متابعة المدفوعات", "تذكير العملاء"] },
-    { name: "إدارة المصاريف", category: "المحاسبة والمالية", color: "bg-red-500", icon: CreditCard, description: "تتبع وإدارة المصاريف", features: ["تسجيل المصاريف", "الموافقات", "التقارير"] },
-    { name: "التدفق النقدي", category: "المحاسبة والمالية", color: "bg-teal-500", icon: TrendingUp, description: "مراقبة التدفق النقدي", features: ["التوقعات", "التحليل", "التنبيهات"] },
+    // المحاسبة والمالية
+    { name: "الكتب المحاسبية", category: "المحاسبة والمالية", color: "bg-emerald-500", icon: FileText, description: "النظام المحاسبي المتكامل", features: ["القيود المحاسبية", "الميزانية العامة", "التقارير المالية"], url: "/app/books" },
+    { name: "المدفوعات", category: "المحاسبة والمالية", color: "bg-blue-500", icon: CreditCard, description: "إدارة المدفوعات الإلكترونية", features: ["بوابات الدفع", "تتبع المدفوعات", "الفواتير"], url: "/app/payments" },
+    { name: "الخدمات المصرفية", category: "المحاسبة والمالية", color: "bg-indigo-500", icon: DollarSign, description: "التكامل مع البنوك", features: ["ربط البنوك", "تسوية الحسابات", "التحويلات"], url: "/app/banking" },
+    { name: "مدفوعات العقود", category: "المحاسبة والمالية", color: "bg-teal-500", icon: FileText, description: "إدارة مدفوعات العقود", features: ["جدولة المدفوعات", "متابعة العقود", "التنبيهات"], url: "/app/contract_payment" },
+    { name: "كشوف العملاء", category: "المحاسبة والمالية", color: "bg-cyan-500", icon: FileBarChart, description: "كشوف حسابات العملاء", features: ["كشوف تفصيلية", "تتبع المستحقات", "التقارير"], url: "/app/customer_statements" },
+    { name: "فواتير المرافق", category: "المحاسبة والمالية", color: "bg-yellow-500", icon: Zap, description: "إدارة فواتير المرافق", features: ["فواتير المياه والكهرباء", "قراءة العدادات", "التحصيل"], url: "/app/utility_billing" },
+    { name: "حساب الزكاة", category: "المحاسبة والمالية", color: "bg-green-500", icon: Calculator, description: "حساب وإدارة الزكاة", features: ["حساب تلقائي للزكاة", "تقارير الزكاة", "التوزيع"], url: "/app/frappe_zakat" },
+
+    // إدارة العملاء والمبيعات
+    { name: "إدارة علاقات العملاء", category: "إدارة العملاء", color: "bg-pink-500", icon: Users, description: "نظام CRM المتطور", features: ["قاعدة العملاء", "تتبع التفاعلات", "إدارة الفرص"], url: "/app/crm" },
+    { name: "المتجر الإلكتروني", category: "إدارة العملاء", color: "bg-purple-500", icon: ShoppingCart, description: "منصة التجارة الإلكترونية", features: ["متجر متكامل", "إدارة المنتجات", "معالجة الطلبات"], url: "/app/webshop" },
+    { name: "تقدير الأسعار", category: "إدارة العملاء", color: "bg-orange-500", icon: Calculator, description: "نظام تقدير الأسعار الذكي", features: ["حساب التكاليف", "عروض الأسعار", "مقارنة الأسعار"], url: "/app/erpnext_price_estimation" },
+    { name: "عملية فتح العروض", category: "إدارة العملاء", color: "bg-red-500", icon: FileText, description: "إدارة عملية طلبات العروض", features: ["إدارة المناقصات", "تقييم العروض", "الترسية"], url: "/app/rfq_opening_process" },
 
     // الموارد البشرية
-    { name: "شؤون الموظفين", category: "الموارد البشرية", color: "bg-blue-600", icon: Users, description: "إدارة شاملة للموظفين", features: ["ملفات الموظفين", "الحضور والانصراف", "الإجازات"] },
-    { name: "كشف الرواتب", category: "الموارد البشرية", color: "bg-green-600", icon: Banknote, description: "معالجة الرواتب والأجور", features: ["حساب الرواتب", "الخصومات", "البدلات"] },
-    { name: "إدارة الأداء", category: "الموارد البشرية", color: "bg-purple-600", icon: Target, description: "تقييم ومتابعة أداء الموظفين", features: ["التقييمات", "الأهداف", "التطوير"] },
-    { name: "التدريب", category: "الموارد البشرية", color: "bg-yellow-600", icon: GraduationCap, description: "إدارة برامج التدريب", features: ["الدورات", "الشهادات", "المتابعة"] },
+    { name: "نظام الموارد البشرية", category: "الموارد البشرية", color: "bg-blue-600", icon: Users, description: "إدارة شاملة للموارد البشرية", features: ["ملفات الموظفين", "الحضور والانصراف", "إدارة الإجازات"], url: "/app/hrms" },
+    { name: "كشف رواتب المشاريع", category: "الموارد البشرية", color: "bg-green-600", icon: DollarSign, description: "إدارة رواتب فرق المشاريع", features: ["رواتب المشاريع", "توزيع التكاليف", "تقارير الأجور"], url: "/app/project_payroll" },
 
-    // المبيعات والتسويق
-    { name: "إدارة العملاء CRM", category: "المبيعات والتسويق", color: "bg-pink-500", icon: Users, description: "إدارة علاقات العملاء", features: ["قاعدة العملاء", "التفاعلات", "المتابعة"] },
-    { name: "المبيعات", category: "المبيعات والتسويق", color: "bg-cyan-500", icon: ShoppingCart, description: "إدارة عمليات البيع", features: ["عروض الأسعار", "الطلبات", "التسليم"] },
-    { name: "التسويق الإلكتروني", category: "المبيعات والتسويق", color: "bg-violet-500", icon: Globe, description: "حملات التسويق الرقمي", features: ["البريد الإلكتروني", "وسائل التواصل", "التحليلات"] },
-    { name: "نقاط البيع POS", category: "المبيعات والتسويق", color: "bg-amber-500", icon: Monitor, description: "نظام نقاط البيع", features: ["المبيعات السريعة", "إدارة المخزون", "التقارير"] },
+    // إدارة المشاريع
+    { name: "مخطط جانت", category: "إدارة المشاريع", color: "bg-indigo-600", icon: BarChart, description: "مخططات جانت للمشاريع", features: ["التخطيط الزمني", "تتبع التقدم", "إدارة المهام"], url: "/app/gantt" },
+    { name: "خطة اللعبة", category: "إدارة المشاريع", color: "bg-purple-600", icon: Target, description: "تخطيط وإدارة المشاريع", features: ["تخطيط استراتيجي", "تتبع الأهداف", "إدارة الفريق"], url: "/app/gameplan" },
+    { name: "قوائم المهام", category: "إدارة المشاريع", color: "bg-cyan-600", icon: CheckCircle, description: "إدارة المهام والأنشطة", features: ["قوائم مهام", "تذكيرات", "تتبع الإنجاز"], url: "/app/todo" },
+    { name: "إدارة العقارات", category: "إدارة المشاريع", color: "bg-teal-600", icon: Building, description: "نظام إدارة العقارات", features: ["سجل العقارات", "عقود الإيجار", "الصيانة"], url: "/app/propms" },
 
-    // المخازن
-    { name: "إدارة المخزون", category: "المخازن", color: "bg-slate-500", icon: Package, description: "تتبع وإدارة المخزون", features: ["الكميات", "المواقع", "التنبيهات"] },
-    { name: "المشتريات", category: "المخازن", color: "bg-stone-500", icon: ShoppingBag, description: "إدارة عمليات الشراء", features: ["طلبات الشراء", "الموردين", "الاستلام"] },
-    { name: "الجرد", category: "المخازن", color: "bg-neutral-500", icon: Clipboard, description: "عمليات الجرد والتدقيق", features: ["الجرد الدوري", "التسوية", "التقارير"] },
-    { name: "إدارة المستودعات", category: "المخازن", color: "bg-zinc-500", icon: Building, description: "تنظيم المستودعات", features: ["المواقع", "الحركة", "التخزين"] },
+    // التواصل والتفاعل
+    { name: "البريد الإلكتروني", category: "التواصل والتفاعل", color: "bg-blue-500", icon: Mail, description: "نظام البريد الإلكتروني", features: ["إرسال واستقبال", "تنظيم الرسائل", "المرفقات"], url: "/app/mail" },
+    { name: "واتساب للأعمال", category: "التواصل والتفاعل", color: "bg-green-500", icon: MessageSquare, description: "تكامل واتساب للأعمال", features: ["رسائل تلقائية", "دعم العملاء", "إشعارات"], url: "/app/waba_integration" },
+    { name: "واتساب العادي", category: "التواصل والتفاعل", color: "bg-green-600", icon: Phone, description: "تكامل واتساب العادي", features: ["رسائل مباشرة", "إشعارات", "تتبع المحادثات"], url: "/app/frappe_whatsapp" },
+    { name: "تليجرام", category: "التواصل والتفاعل", color: "bg-blue-400", icon: MessageSquare, description: "تكامل تليجرام", features: ["رسائل تليجرام", "بوت تلقائي", "إشعارات"], url: "/app/erpnext_telegram_integration" },
+    { name: "إكسوتيل", category: "التواصل والتفاعل", color: "bg-orange-400", icon: Phone, description: "تكامل خدمات الاتصال", features: ["مكالمات صوتية", "تسجيل المكالمات", "تقارير الاتصال"], url: "/app/exotel_integration" },
+    { name: "تذكير البريد", category: "التواصل والتفاعل", color: "bg-yellow-400", icon: Bell, description: "نظام تذكير البريد", features: ["تذكيرات تلقائية", "جدولة الرسائل", "متابعة الردود"], url: "/app/mail_reminder" },
+    { name: "خدمة توصيل البريد", category: "التواصل والتفاعل", color: "bg-purple-400", icon: Mail, description: "خدمة توصيل البريد الإلكتروني", features: ["توصيل موثوق", "تتبع الرسائل", "تقارير التسليم"], url: "/app/email_delivery_service" },
 
-    // الصيانة
-    { name: "طلبات الصيانة", category: "الصيانة", color: "bg-orange-600", icon: Wrench, description: "إدارة طلبات الصيانة", features: ["الطلبات", "الأولويات", "التتبع"] },
-    { name: "الصيانة الوقائية", category: "الصيانة", color: "bg-red-600", icon: Shield, description: "برامج الصيانة الوقائية", features: ["الجدولة", "التذكير", "السجلات"] },
-    { name: "إدارة الأصول", category: "الصيانة", color: "bg-lime-600", icon: Factory, description: "تتبع وإدارة الأصول", features: ["سجل الأصول", "الاستهلاك", "الصيانة"] },
-    { name: "فرق الصيانة", category: "الصيانة", color: "bg-emerald-600", icon: Users, description: "إدارة فرق العمل", features: ["التخصيص", "الجدولة", "المتابعة"] },
+    // المساعدة والدعم
+    { name: "مكتب المساعدة", category: "المساعدة والدعم", color: "bg-red-500", icon: Headphones, description: "نظام دعم العملاء", features: ["تذاكر الدعم", "قاعدة المعرفة", "دردشة مباشرة"], url: "/app/helpdesk" },
+    { name: "الويكي", category: "المساعدة والدعم", color: "bg-indigo-500", icon: Bookmark, description: "قاعدة المعرفة والوثائق", features: ["مقالات تفاعلية", "بحث متقدم", "تنظيم المحتوى"], url: "/app/wiki" },
+    { name: "نظام إدارة التعلم", category: "المساعدة والدعم", color: "bg-purple-500", icon: GraduationCap, description: "منصة التعليم الإلكتروني", features: ["دورات تدريبية", "اختبارات", "شهادات"], url: "/app/lms" },
 
-    // التقارير
-    { name: "لوحة المؤشرات", category: "التقارير", color: "bg-blue-700", icon: BarChart, description: "مؤشرات الأداء الرئيسية", features: ["KPIs", "الرسوم البيانية", "التحليل"] },
-    { name: "التقارير المالية", category: "التقارير", color: "bg-green-700", icon: PieChart, description: "التقارير المحاسبية", features: ["الميزانية", "الأرباح", "التدفق النقدي"] },
-    { name: "تقارير المشاريع", category: "التقارير", color: "bg-purple-700", icon: FileBarChart, description: "تقارير تقدم المشاريع", features: ["التقدم", "الموارد", "التكاليف"] },
-    { name: "التحليلات المتقدمة", category: "التقارير", color: "bg-indigo-700", icon: TrendingUp, description: "تحليلات ذكية للبيانات", features: ["الذكاء الاصطناعي", "التوقعات", "الاتجاهات"] },
+    // التقارير والتحليلات
+    { name: "الرسوم البيانية", category: "التقارير والتحليلات", color: "bg-orange-600", icon: PieChart, description: "مكتبة الرسوم البيانية", features: ["رسوم تفاعلية", "تحليل البيانات", "لوحات معلومات"], url: "/app/frappe_charts" },
+    { name: "الرؤى والتحليلات", category: "التقارير والتحليلات", color: "bg-cyan-600", icon: TrendingUp, description: "تحليلات ذكية متقدمة", features: ["ذكاء اصطناعي", "تنبؤات", "تحليل الاتجاهات"], url: "/app/insights" },
 
-    // الأمان
-    { name: "إدارة المستخدمين", category: "الأمان", color: "bg-red-700", icon: Users, description: "إدارة حسابات المستخدمين", features: ["الحسابات", "الصلاحيات", "المراقبة"] },
-    { name: "الأمان والحماية", category: "الأمان", color: "bg-gray-700", icon: Shield, description: "حماية النظام والبيانات", features: ["التشفير", "النسخ الاحتياطي", "المراقبة"] },
-    { name: "سجل النشاطات", category: "الأمان", color: "bg-slate-700", icon: FileText, description: "تتبع أنشطة المستخدمين", features: ["السجلات", "التنبيهات", "التحليل"] },
-    { name: "النسخ الاحتياطي", category: "الأمان", color: "bg-zinc-700", icon: Database, description: "حفظ واسترداد البيانات", features: ["النسخ التلقائي", "الاسترداد", "الجدولة"] }
+    // الخدمات المتخصصة
+    { name: "إدارة التأشيرات", category: "الخدمات المتخصصة", color: "bg-blue-700", icon: Key, description: "نظام إدارة التأشيرات", features: ["طلبات التأشيرة", "تتبع الحالة", "المستندات"], url: "/app/visa_management" },
+    { name: "الامتثال المصري", category: "الخدمات المتخصصة", color: "bg-red-600", icon: Shield, description: "نظام الامتثال للقوانين المصرية", features: ["ضريبة القيمة المضافة", "التقارير الحكومية", "الامتثال القانوني"], url: "/app/erpnext_egypt_compliance" },
+    { name: "نظام الإقراض", category: "الخدمات المتخصصة", color: "bg-green-700", icon: DollarSign, description: "إدارة القروض والتمويل", features: ["طلبات القروض", "جدولة السداد", "إدارة المخاطر"], url: "/app/lending" },
+    { name: "التصميم", category: "الخدمات المتخصصة", color: "bg-pink-600", icon: Paintbrush, description: "أدوات التصميم والإبداع", features: ["تصميم جرافيكي", "قوالب", "أدوات إبداعية"], url: "/app/design" },
+    { name: "التوقيع الرقمي", category: "الخدمات المتخصصة", color: "bg-purple-700", icon: Edit, description: "نظام التوقيع الإلكتروني", features: ["توقيع آمن", "تشفير", "مصادقة رقمية"], url: "/app/digital_signer" },
+    { name: "مصمم الطباعة", category: "الخدمات المتخصصة", color: "bg-gray-600", icon: FileText, description: "تصميم وتخصيص التقارير", features: ["قوالب مخصصة", "تنسيق متقدم", "طباعة احترافية"], url: "/app/print_designer" },
+    { name: "صناع التغيير", category: "الخدمات المتخصصة", color: "bg-yellow-600", icon: Users, description: "منصة إدارة المبادرات", features: ["إدارة المبادرات", "تتبع التأثير", "التعاون"], url: "/app/changemakers" },
+
+    // أدوات إضافية
+    { name: "القرص السحابي", category: "الخدمات المتخصصة", color: "bg-blue-500", icon: Cloud, description: "تخزين ومشاركة الملفات", features: ["تخزين آمن", "مشاركة الملفات", "نسخ احتياطية"], url: "/app/drive" },
+    { name: "الاجتماعات", category: "التواصل والتفاعل", color: "bg-green-500", icon: Video, description: "نظام إدارة الاجتماعات", features: ["جدولة الاجتماعات", "محاضر", "متابعة القرارات"], url: "/app/meeting" },
+    { name: "تريلو", category: "إدارة المشاريع", color: "bg-blue-400", icon: Grid, description: "تكامل مع تريلو", features: ["لوحات المشاريع", "بطاقات المهام", "تتبع التقدم"], url: "/app/trello" },
+    { name: "رافين", category: "التواصل والتفاعل", color: "bg-gray-500", icon: MessageSquare, description: "منصة التواصل الداخلي", features: ["محادثات الفريق", "قنوات", "مشاركة الملفات"], url: "/app/raven" },
+    { name: "الذكاء الاصطناعي", category: "الخدمات المتخصصة", color: "bg-violet-600", icon: Cpu, description: "تكامل الذكاء الاصطناعي", features: ["مساعد ذكي", "تحليل النصوص", "أتمتة المهام"], url: "/app/frappe_openai_integration" }
   ]
 
   // Fix: Add the missing Clock and other icons - REMOVED, using lucide-react icons directly
@@ -246,7 +263,12 @@ const AppsHub = () => {
                 
                 if (viewMode === "list") {
                   return (
-                    <Card key={index} className="hover:shadow-xl transition-all duration-300 cursor-pointer group animate-fade-in border-l-4 border-l-transparent hover:border-l-primary" style={{animationDelay: `${index * 0.1}s`}}>
+                    <Card 
+                      key={index} 
+                      className="hover:shadow-xl transition-all duration-300 cursor-pointer group animate-fade-in border-l-4 border-l-transparent hover:border-l-primary" 
+                      style={{animationDelay: `${index * 0.1}s`}}
+                      onClick={() => window.open(app.url, '_blank')}
+                    >
                       <CardContent className="p-6">
                         <div className="flex items-center gap-4">
                           <div className={`w-16 h-16 ${app.color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
@@ -286,7 +308,12 @@ const AppsHub = () => {
                 }
 
                 return (
-                  <Card key={index} className="hover:shadow-xl transition-all duration-500 cursor-pointer group animate-fade-in hover:-translate-y-2" style={{animationDelay: `${index * 0.1}s`}}>
+                  <Card 
+                    key={index} 
+                    className="hover:shadow-xl transition-all duration-500 cursor-pointer group animate-fade-in hover:-translate-y-2" 
+                    style={{animationDelay: `${index * 0.1}s`}}
+                    onClick={() => window.open(app.url, '_blank')}
+                  >
                     <CardContent className="p-6 text-center relative">
                       {/* Favorite Button */}
                       <Button
