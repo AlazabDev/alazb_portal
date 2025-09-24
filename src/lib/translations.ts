@@ -72,6 +72,9 @@ export interface TranslationKeys {
     support: string
     reports: string
     specialized: string
+    appsAvailable: string
+    listView: string
+    gridView: string
     apps: {
       [key: string]: {
         name: string
@@ -205,26 +208,29 @@ export const translations: Record<Language, TranslationKeys> = {
       termsOfService: 'شروط الاستخدام',
       accessLevel: 'اختر مستوى الوصول الخاص بك'
     },
-    appsHub: {
-      welcome: 'مرحباً بك في بوابة تطبيقات العزب',
-      categories: [
-        'التطبيقات المفضلة: وصول سريع لما تستخدمه يومياً',
-        'المشاريع والصيانة: أدوات لتتبع عملك وخدماتك',
-        'لوحات المعلومات: تقارير في الوقت الفعلي وتحليلات',
-        'البريد والتواصل: اتصال آمن وفعال مع فريقك وعملائك'
-      ],
-      searchPlaceholder: 'البحث في التطبيقات...',
-      allApps: 'الكل',
-      favoriteApps: 'المفضلة',
-      systemCore: 'النظام الأساسي',
-      accounting: 'المحاسبة والمالية',
-      crm: 'إدارة العملاء',
-      hr: 'الموارد البشرية',
-      projects: 'إدارة المشاريع',
-      communication: 'التواصل والتفاعل',
-      support: 'المساعدة والدعم',
-      reports: 'التقارير والتحليلات',
-      specialized: 'الخدمات المتخصصة',
+      appsHub: {
+        welcome: 'مرحباً بك في بوابة تطبيقات العزب',
+        categories: [
+          'التطبيقات المفضلة: وصول سريع لما تستخدمه يومياً',
+          'المشاريع والصيانة: أدوات لتتبع عملك وخدماتك',
+          'لوحات المعلومات: تقارير في الوقت الفعلي وتحليلات',
+          'البريد والتواصل: اتصال آمن وفعال مع فريقك وعملائك'
+        ],
+        searchPlaceholder: 'البحث في التطبيقات...',
+        allApps: 'الكل',
+        favoriteApps: 'المفضلة',
+        systemCore: 'النظام الأساسي',
+        accounting: 'المحاسبة والمالية',
+        crm: 'إدارة العملاء',
+        hr: 'الموارد البشرية',
+        projects: 'إدارة المشاريع',
+        communication: 'التواصل والتفاعل',
+        support: 'المساعدة والدعم',
+        reports: 'التقارير والتحليلات',
+        specialized: 'الخدمات المتخصصة',
+        appsAvailable: 'تطبيق متاح',
+        listView: 'قائمة',
+        gridView: 'شبكة',
       apps: {
         frappe: {
           name: 'إطار العمل الأساسي',
@@ -594,6 +600,9 @@ export const translations: Record<Language, TranslationKeys> = {
       support: 'Help & Support',
       reports: 'Reports & Analytics',
       specialized: 'Specialized Services',
+      appsAvailable: 'apps available',
+      listView: 'List',
+      gridView: 'Grid',
       apps: {
         frappe: {
           name: 'Frappe Framework',

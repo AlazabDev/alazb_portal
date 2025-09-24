@@ -177,13 +177,13 @@ const AppsHub = () => {
 
         {/* Results Summary */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <span>{filteredApps.length} تطبيق متاح</span>
-            {selectedCategory !== t.appsHub.allApps && (
-              <Badge variant="secondary" className="text-xs">
-                {selectedCategory}
-              </Badge>
-            )}
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <span>{filteredApps.length} {t.appsHub.appsAvailable}</span>
+          {selectedCategory !== t.appsHub.allApps && (
+            <Badge variant="secondary" className="text-xs">
+              {selectedCategory}
+            </Badge>
+          )}
           </div>
           <div className="flex items-center gap-2">
             <Button
@@ -193,7 +193,7 @@ const AppsHub = () => {
               className="text-xs"
             >
               {viewMode === "grid" ? <List className="w-4 h-4" /> : <Grid className="w-4 h-4" />}
-              {viewMode === "grid" ? "قائمة" : "شبكة"}
+              {viewMode === "grid" ? t.appsHub.listView : t.appsHub.gridView}
             </Button>
           </div>
         </div>
