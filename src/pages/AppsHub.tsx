@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { 
   Search, ArrowRight, Star, Grid, List, Filter, 
   Settings, Users, BarChart, FileText, Calendar,
@@ -106,8 +105,6 @@ const AppsHub = () => {
     { name: t.appsHub.apps.openai_integration.name, category: t.appsHub.specialized, color: "bg-violet-600", icon: Cpu, description: t.appsHub.apps.openai_integration.description, features: t.appsHub.apps.openai_integration.features, url: "/app/frappe_openai_integration" }
   ]
 
-  // Fix: Add the missing Clock and other icons - REMOVED, using lucide-react icons directly
-
   const filteredApps = allApps.filter(app => {
     const matchesSearch = app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          app.description.toLowerCase().includes(searchQuery.toLowerCase())
@@ -123,287 +120,174 @@ const AppsHub = () => {
     )
   }
 
-  const categories = t.appsHub.categories
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-background to-muted/30">
       <Header />
       
-      {/* Hero Section */}
-      <section className="bg-white py-16 relative overflow-hidden">
-        {/* Enhanced Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-customer via-employee to-admin rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-orange via-customer to-employee rounded-full blur-3xl animate-float" style={{animationDelay: '1s'}}></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-admin to-orange rounded-full blur-2xl animate-pulse-slow"></div>
-        </div>
-        
-        <div className="container mx-auto px-6 text-center relative">
-          <div className="animate-fade-in">
-            <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
-              مرحباً بك في <span className="bg-gradient-to-r from-customer to-employee bg-clip-text text-transparent">Al-Azab Apps Hub</span>
-            </h1>
-            
-            <div className="max-w-4xl mx-auto space-y-4 text-muted-foreground mb-12 animate-fade-in" style={{animationDelay: '0.2s'}}>
-              {categories.map((category, index) => (
-                <p key={index} className="text-lg leading-relaxed">{category}</p>
-              ))}
-            </div>
-
-            {/* Enhanced Progress Indicators */}
-            <div className="flex justify-center gap-4 mb-12 animate-fade-in" style={{animationDelay: '0.4s'}}>
-              {[
-                { color: 'bg-primary', label: 'النظام الأساسي' },
-                { color: 'bg-customer', label: 'العملاء' },
-                { color: 'bg-employee', label: 'الموظفين' },
-                { color: 'bg-admin', label: 'الإدارة' },
-                { color: 'bg-orange', label: 'التطبيقات' },
-                { color: 'bg-muted', label: 'المزيد قريباً' }
-              ].map((item, index) => (
-                <div key={index} className="text-center group">
-                  <div className={`w-4 h-4 rounded-full ${item.color} mx-auto mb-2 transition-all duration-300 group-hover:scale-125 group-hover:shadow-lg`}></div>
-                  <span className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">{item.label}</span>
-                </div>
-              ))}
-            </div>
+      {/* Main Content Area */}
+      <div className="container mx-auto px-4 py-6 space-y-6">
+        {/* Header Section */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Button 
+              variant="ghost" 
+              size="sm"
+              className="p-2"
+            >
+              <List className="w-4 h-4" />
+            </Button>
+            <Button 
+              variant={viewMode === "grid" ? "default" : "ghost"}
+              size="sm"
+              onClick={() => setViewMode("grid")}
+              className="p-2"
+            >
+              <Grid className="w-4 h-4" />
+            </Button>
+          </div>
+          
+          {/* Search Bar */}
+          <div className="relative max-w-md">
+            <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+            <Input 
+              placeholder={t.appsHub.searchPlaceholder}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pr-10 pl-4 h-9 text-sm rounded-lg border bg-background/50"
+            />
           </div>
         </div>
-      </section>
 
-      {/* Enhanced Apps Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-6">
-          <div className="animate-fade-in">
-            <h2 className="text-4xl font-bold text-center text-foreground mb-6">
-              {t.appsHub.welcome}
-            </h2>
+        {/* Category Navigation */}
+        <div className="bg-background/80 backdrop-blur-sm rounded-xl border p-2">
+          <div className="flex flex-wrap gap-2">
+            {appCategories.map((category) => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? "default" : "ghost"}
+                size="sm"
+                onClick={() => setSelectedCategory(category)}
+                className="text-sm font-medium rounded-lg px-4 py-2 transition-all duration-200"
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
+        </div>
+
+        {/* Results Summary */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <span>{filteredApps.length} تطبيق متاح</span>
+            {selectedCategory !== t.appsHub.allApps && (
+              <Badge variant="secondary" className="text-xs">
+                {selectedCategory}
+              </Badge>
+            )}
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setViewMode(viewMode === "grid" ? "list" : "grid")}
+              className="text-xs"
+            >
+              {viewMode === "grid" ? <List className="w-4 h-4" /> : <Grid className="w-4 h-4" />}
+              {viewMode === "grid" ? "قائمة" : "شبكة"}
+            </Button>
+          </div>
+        </div>
+
+        {/* Apps Grid */}
+        <div className={`${
+          viewMode === "grid" 
+            ? "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4" 
+            : "space-y-3"
+        }`}>
+          {filteredApps.map((app, index) => {
+            const IconComponent = app.icon
+            const isFavorite = favoriteApps.includes(app.name)
             
-            {/* Enhanced Search and Filters */}
-            <div className="max-w-4xl mx-auto mb-12 space-y-6">
-              {/* Search Bar */}
-              <div className="relative">
-                <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-muted-foreground w-6 h-6" />
-                <Input 
-                  placeholder={t.appsHub.searchPlaceholder}
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-14 pr-6 py-4 text-lg rounded-2xl border-2 focus:border-primary shadow-lg transition-all duration-300 hover:shadow-xl"
-                />
-                {searchQuery && (
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    onClick={() => setSearchQuery("")}
-                    className="absolute left-2 top-1/2 transform -translate-y-1/2"
-                  >
-                    ✕
-                  </Button>
-                )}
-              </div>
-
-              {/* Category Tabs */}
-              <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
-                <TabsList className="grid grid-cols-3 lg:grid-cols-5 xl:grid-cols-9 w-full bg-white/50 backdrop-blur-sm border shadow-lg rounded-2xl p-2">
-                  {appCategories.map((category) => (
-                    <TabsTrigger 
-                      key={category} 
-                      value={category}
-                      className="text-xs lg:text-sm font-medium rounded-xl transition-all duration-300 hover:bg-primary/10"
-                    >
-                      {category}
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
-              </Tabs>
-
-              {/* View Controls */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <span className="text-sm text-muted-foreground">
-                    {filteredApps.length} تطبيق متاح
-                  </span>
-                  <Badge variant="secondary" className="bg-orange/10 text-orange border-orange/20">
-                    {selectedCategory}
-                  </Badge>
-                </div>
-                
-                <div className="flex items-center gap-2">
-                  <Button
-                    variant={viewMode === "grid" ? "customer" : "outline"}
-                    size="sm"
-                    onClick={() => setViewMode("grid")}
-                    className="transition-all duration-300"
-                  >
-                    <Grid className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    variant={viewMode === "list" ? "customer" : "outline"}
-                    size="sm"
-                    onClick={() => setViewMode("list")}
-                    className="transition-all duration-300"
-                  >
-                    <List className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            {/* Enhanced Apps Grid */}
-            <div className={`max-w-7xl mx-auto mb-12 ${
-              viewMode === "grid" 
-                ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6" 
-                : "space-y-4"
-            }`}>
-              {filteredApps.map((app, index) => {
-                const IconComponent = app.icon
-                const isFavorite = favoriteApps.includes(app.name)
-                
-                if (viewMode === "list") {
-                  return (
-                    <Card 
-                      key={index} 
-                      className="hover:shadow-xl transition-all duration-300 cursor-pointer group animate-fade-in border-l-4 border-l-transparent hover:border-l-primary" 
-                      style={{animationDelay: `${index * 0.1}s`}}
-                      onClick={() => window.open(app.url, '_blank')}
-                    >
-                      <CardContent className="p-6">
-                        <div className="flex items-center gap-4">
-                          <div className={`w-16 h-16 ${app.color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                            <IconComponent className="w-8 h-8 text-white" />
-                          </div>
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-2">
-                              <h3 className="font-bold text-foreground group-hover:text-primary transition-colors">{app.name}</h3>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={(e) => {
-                                  e.stopPropagation()
-                                  toggleFavorite(app.name)
-                                }}
-                                className="p-1 hover:bg-yellow-100"
-                              >
-                                <Star className={`w-4 h-4 ${isFavorite ? 'fill-yellow-400 text-yellow-400' : 'text-gray-400'}`} />
-                              </Button>
-                            </div>
-                            <p className="text-muted-foreground text-sm mb-2">{app.description}</p>
-                            <div className="flex flex-wrap gap-1">
-                              {app.features.slice(0, 3).map((feature, fIndex) => (
-                                <Badge key={fIndex} variant="outline" className="text-xs">
-                                  {feature}
-                                </Badge>
-                              ))}
-                            </div>
-                          </div>
-                          <Badge className={`${app.color} text-white border-0`}>
-                            {app.category}
-                          </Badge>
+            if (viewMode === "list") {
+              return (
+                <Card 
+                  key={index} 
+                  className="hover:shadow-lg transition-all duration-200 cursor-pointer group border-l-4 border-l-transparent hover:border-l-primary" 
+                  onClick={() => window.open(app.url, '_blank')}
+                >
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-12 h-12 ${app.color} rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-200`}>
+                        <IconComponent className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors truncate">{app.name}</h3>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              toggleFavorite(app.name)
+                            }}
+                            className="p-1 opacity-60 hover:opacity-100"
+                          >
+                            <Star className={`w-3 h-3 ${isFavorite ? 'fill-yellow-400 text-yellow-400' : 'text-gray-400'}`} />
+                          </Button>
                         </div>
-                      </CardContent>
-                    </Card>
-                  )
-                }
+                        <p className="text-xs text-muted-foreground truncate">{app.description}</p>
+                      </div>
+                      <Badge variant="secondary" className="text-xs">
+                        {app.category}
+                      </Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            }
 
-                return (
-                  <Card 
-                    key={index} 
-                    className="hover:shadow-xl transition-all duration-500 cursor-pointer group animate-fade-in hover:-translate-y-2" 
-                    style={{animationDelay: `${index * 0.1}s`}}
-                    onClick={() => window.open(app.url, '_blank')}
+            return (
+              <Card 
+                key={index} 
+                className="hover:shadow-lg transition-all duration-200 cursor-pointer group hover:-translate-y-1 aspect-square" 
+                onClick={() => window.open(app.url, '_blank')}
+              >
+                <CardContent className="p-4 flex flex-col items-center justify-center h-full text-center relative">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      toggleFavorite(app.name)
+                    }}
+                    className="absolute top-1 right-1 p-1 opacity-0 group-hover:opacity-100 transition-opacity"
                   >
-                    <CardContent className="p-6 text-center relative">
-                      {/* Favorite Button */}
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          toggleFavorite(app.name)
-                        }}
-                        className="absolute top-2 right-2 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      >
-                        <Star className={`w-4 h-4 ${isFavorite ? 'fill-yellow-400 text-yellow-400' : 'text-gray-400'}`} />
-                      </Button>
+                    <Star className={`w-3 h-3 ${isFavorite ? 'fill-yellow-400 text-yellow-400' : 'text-gray-400'}`} />
+                  </Button>
 
-                      <div className={`w-16 h-16 ${app.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg group-hover:shadow-2xl`}>
-                        <IconComponent className="w-8 h-8 text-white" />
-                      </div>
-                      
-                      <h3 className="font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">{app.name}</h3>
-                      <p className="text-xs text-muted-foreground mb-3 leading-tight">{app.description}</p>
-                      
-                      <div className="space-y-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                        {app.features.slice(0, 2).map((feature, fIndex) => (
-                          <Badge key={fIndex} variant="outline" className="text-xs block">
-                            {feature}
-                          </Badge>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                )
-              })}
-            </div>
+                  <div className={`w-12 h-12 ${app.color} rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-all duration-200`}>
+                    <IconComponent className="w-6 h-6 text-white" />
+                  </div>
+                  
+                  <h3 className="font-semibold text-sm text-foreground mb-2 group-hover:text-primary transition-colors leading-tight">{app.name}</h3>
+                  <p className="text-xs text-muted-foreground leading-tight opacity-0 group-hover:opacity-100 transition-opacity duration-200">{app.description}</p>
+                </CardContent>
+              </Card>
+            )
+          })}
+        </div>
 
-            {/* Enhanced Bottom Section */}
-            <div className="text-center animate-fade-in bg-white/50 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
-              <h3 className="text-3xl font-bold text-foreground mb-4">
-                جميع خدماتك وأدواتك في <span className="text-orange">مكان واحد</span>
-              </h3>
-              <p className="text-muted-foreground mb-8 text-lg">هل تحتاج تطبيق معين؟ أخبرنا وسنقوم بإضافته!</p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button variant="orange" size="lg" className="gap-3 text-lg px-8 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 animate-bounce-soft">
-                  <ArrowRight className="w-6 h-6" />
-                  طلب تطبيق جديد
-                </Button>
-                
-                <Button variant="outline" size="lg" className="gap-3 text-lg px-8 py-4 rounded-2xl">
-                  <MessageSquare className="w-6 h-6" />
-                  اتصل بالدعم التقني
-                </Button>
-              </div>
+        {/* No Results Message */}
+        {filteredApps.length === 0 && (
+          <div className="text-center py-12">
+            <div className="w-24 h-24 mx-auto mb-4 bg-muted rounded-full flex items-center justify-center">
+              <Search className="w-12 h-12 text-muted-foreground" />
             </div>
+            <h3 className="text-lg font-semibold text-foreground mb-2">لم يتم العثور على تطبيقات</h3>
+            <p className="text-muted-foreground">جرب البحث بكلمات أخرى أو اختر فئة مختلفة</p>
           </div>
-        </div>
-      </section>
-
-      {/* Enhanced Footer */}
-      <footer className="bg-gradient-to-r from-primary via-primary to-primary/90 text-primary-foreground py-12 relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
-        </div>
-        
-        <div className="container mx-auto px-6 relative">
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
-            <div className="text-center lg:text-right">
-              <div className="flex items-center gap-3 mb-4">
-                <Button variant="ghost" size="sm" className="text-primary-foreground/80 hover:text-primary-foreground hover:bg-white/10">
-                  🌙 تبديل الوضع المظلم
-                </Button>
-                <span className="text-primary-foreground/60">|</span>
-                <span className="text-sm">تم التطوير بواسطة <span className="text-orange font-semibold">Alazab.dev</span></span>
-              </div>
-            </div>
-            
-            <div className="text-center lg:text-left text-sm space-y-2 max-w-4xl">
-              <p className="text-primary-foreground/90">
-                <strong>شركة العزب للإنشاءات</strong> — شركة تابعة للعلامة التجارية المسجلة (د-ل-ن-ص رقم: 849203826)، تعمل باسم تجاري "عزب للتنفيذ".
-              </p>
-              <p className="text-primary-foreground/80 leading-relaxed">
-                "أعمال الإدارة للمشاريع الصناعية والخدمية والإمدادات العامة" المكتب الرئيسي: 8/500 شارع المعادي، القاهرة 4234570، مصر | 
-                البريد الإلكتروني: <span className="text-orange">info@alazab.com</span> | الهاتف: <span className="text-orange">+20 2 27047955</span> | 
-                الموقع: <span className="text-orange">www.alazab.com</span>
-              </p>
-              <p className="text-primary-foreground/60">
-                جميع الحقوق محفوظة. © 2025 www.alazab.com
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
+        )}
+      </div>
     </div>
   )
 }
