@@ -208,7 +208,7 @@ export const translations: Record<Language, TranslationKeys> = {
       termsOfService: 'شروط الاستخدام',
       accessLevel: 'اختر مستوى الوصول الخاص بك'
     },
-      appsHub: {
+    appsHub: {
         welcome: 'مرحباً بك في بوابة تطبيقات العزب',
         categories: [
           'التطبيقات المفضلة: وصول سريع لما تستخدمه يومياً',
@@ -231,7 +231,7 @@ export const translations: Record<Language, TranslationKeys> = {
         appsAvailable: 'تطبيق متاح',
         listView: 'قائمة',
         gridView: 'شبكة',
-      apps: {
+        apps: {
         frappe: {
           name: 'إطار العمل الأساسي',
           description: 'منصة التطوير الأساسية',
