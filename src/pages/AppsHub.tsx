@@ -283,8 +283,8 @@ const AppsHub = () => {
             <div className="w-24 h-24 mx-auto mb-4 bg-muted rounded-full flex items-center justify-center">
               <Search className="w-12 h-12 text-muted-foreground" />
             </div>
-            <h3 className="text-lg font-semibold text-foreground mb-2">لم يتم العثور على تطبيقات</h3>
-            <p className="text-muted-foreground">جرب البحث بكلمات أخرى أو اختر فئة مختلفة</p>
+            <h3 className="text-lg font-semibold text-foreground mb-2">{t.appsHub.noResultsFound}</h3>
+            <p className="text-muted-foreground">{t.appsHub.tryDifferentSearch}</p>
           </div>
         )}
       </div>
