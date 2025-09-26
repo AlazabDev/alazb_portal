@@ -230,11 +230,11 @@ export const translations: Record<Language, TranslationKeys> = {
         support: 'المساعدة والدعم',
         reports: 'التقارير والتحليلات',
         specialized: 'الخدمات المتخصصة',
-      appsAvailable: 'تطبيق متاح',
-      listView: 'قائمة',
-      gridView: 'شبكة',
-      noResultsFound: 'لم يتم العثور على تطبيقات',
-      tryDifferentSearch: 'جرب البحث بكلمات أخرى أو اختر فئة مختلفة',
+        appsAvailable: 'تطبيق متاح',
+        listView: 'قائمة',
+        gridView: 'شبكة',
+        noResultsFound: 'لم يتم العثور على تطبيقات',
+        tryDifferentSearch: 'جرب البحث بكلمات أخرى أو اختر فئة مختلفة',
         apps: {
         frappe: {
           name: 'إطار العمل الأساسي',
